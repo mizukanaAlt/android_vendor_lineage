@@ -1,3 +1,17 @@
+PRODUCT_DEX_PREOPT_GENERATE_DM_FILES := true
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := verify
+
+PRODUCT_DEX_PREOPT_BOOT_FLAGS += \
+    --compiler-filter=speed \
+    --no-watch-dog
+
+PRODUCT_DEX_PREOPT_DEFAULT_FLAGS += \
+    --compiler-filter=speed \
+    --no-watch-dog
+    
+$(call add-product-dex-preopt-module-config,services,--compiler-filter=speed)
+$(call add-product-dex-preopt-module-config,wifi-service,--compiler-filter=speed)
+
 # Speed profile services and wifi-service to reduce RAM and storage.
 PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 
@@ -22,6 +36,10 @@ PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
 system/etc/preloaded-classes.txt
 
 PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-filter=speed \
+    dalvik.vm.image-dex2oat-filter=speed \
+    dalvik.vm.dex2oat-swap=false \
+    dalvik.vm.foreground-heap-growth-multiplier=2.0 \
     dalvik.vm.minidebuginfo=false \
     dalvik.vm.dex2oat-minidebuginfo=false
 
