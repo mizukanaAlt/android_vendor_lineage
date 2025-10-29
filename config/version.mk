@@ -54,6 +54,8 @@ TORCH_STR_SUPPORTED ?= false
 
 # optional
 TARGET_USES_BORE ?= false
+TARGET_USES_SLMK ?= false
+TARGET_SLMK_DEBUG ?= false
 
 # AxionOS properties - Build info
 PRODUCT_SYSTEM_PROPERTIES += \
@@ -91,4 +93,6 @@ endif
 
 # optional
 PRODUCT_PRODUCT_PROPERTIES += \
-    persist.sys.target_uses_bore=$(TARGET_USES_BORE)
+    persist.sys.target_uses_bore=$(TARGET_USES_BORE) \
+    ro.lmk.use_simple_lmk=$(TARGET_USES_SLMK) \
+    ro.lmk.slmk_debug=$(TARGET_SLMK_DEBUG)
